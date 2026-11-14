@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>DeepSeek API Playground · 浏览器真调</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%234d6bfe'/%3E%3Ctext x='16' y='22' font-size='15' font-family='monospace' fill='white' text-anchor='middle'%3EDS%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="top">
+  <div class="brand">
+    <span class="logo">DS</span>
+    <div>
+      <h1>DeepSeek API Playground</h1>
+      <p>浏览器直连 <code>api.deepseek.com</code> · 真实计费 · 密钥只存在你的 localStorage</p>
+    </div>
+    <a class="back" href="../index.html">← 渲染效果</a>
+  </div>
+  <div class="keybar">
+    <input id="key" type="password" placeholder="sk-..." autocomplete="off" spellcheck="false">
+    <button id="saveKey" class="btn primary">保存</button>
+    <button id="clearKey" class="btn ghost">清除</button>
+    <span id="keyState" class="hint"></span>
+  </div>
+</header>
+
+<main class="layout">
+  <nav class="caps" id="caps"></nav>
+
+  <section class="panel">
+    <div class="panel-head">
+      <h2 id="capTitle">—</h2>
+      <p id="capDesc"></p>
+    </div>
+
+    <div class="form" id="form"></div>
+
+    <div class="runrow">
+      <button id="run" class="btn primary">运行</button>
+      <span id="status" class="status"></span>
+      <span id="cost" class="hint"></span>
+    </div>
+
+    <div class="tabs" id="tabs">
+      <button data-tab="render" class="tab active">渲染</button>
+      <button data-tab="raw" class="tab">原始响应</button>
+      <button data-tab="req" class="tab">请求体</button>
+    </div>
+
+    <div class="out" id="out"></div>
+  </section>
+</main>
+
+<footer class="foot">
+  <span>进阶：<code>thinking</code> 默认是开着的，选「关闭」才会拿到 <code>kind=search</code>。</span>
+  <span>示例代码见 <a href="https://github.com/JimmyWangJimmy/deepseek-app-api-tutorial/tree/main/demos">demos/</a></span>
+</footer>
+
+<script src="app.js"></script>
+</body>
+</html>

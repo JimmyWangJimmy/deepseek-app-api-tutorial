@@ -6,7 +6,8 @@ On 2026-11-13 DeepSeek opened the full set of capabilities behind its official a
 
 - 📖 Full tutorial (Chinese): [docs/TUTORIAL.md](docs/TUTORIAL.md)
 - 🖥 Rendered demo page: [jimmywangjimmy.github.io/deepseek-app-api-tutorial](https://jimmywangjimmy.github.io/deepseek-app-api-tutorial/)
-- 🧪 14 runnable scripts: [demos/](demos/)
+- 🧪 **In-browser playground**: [jimmywangjimmy.github.io/…/playground/](https://jimmywangjimmy.github.io/deepseek-app-api-tutorial/playground/)
+- 🐍 14 runnable scripts: [demos/](demos/)
 - Official announcement: [api-docs.deepseek.com/news/news261113](https://api-docs.deepseek.com/news/news261113/)
 - 🎙 Real run logs (2026-11-14, all 14 demos with a live key): [examples/runs/](examples/runs/)
 
@@ -51,6 +52,12 @@ python3 12_full_chatbot.py           # interactive full chatbot
 ```
 
 Every script supports `--dry-run` and `--show-thinking`.
+
+## In-browser playground
+
+Open the [playground](https://jimmywangjimmy.github.io/deepseek-app-api-tutorial/playground/), paste your key, and drive every capability from the page: chat across all three protocols, multi-turn `signature` handling, Search, Fetch, file upload, OCR, TTS and ASR. Each panel shows the rendered result, the raw response and the request body side by side.
+
+It is a zero-dependency static page that talks to `api.deepseek.com` directly — the API sends the CORS headers browsers need, so no proxy is involved. The key lives in your own `localStorage`; every click is a real, billed request.
 
 ## Demos
 

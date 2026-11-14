@@ -6,13 +6,37 @@ DeepSeek 在 2026/11/13 把自家 App 的能力全部开成了 API：联网搜�
 
 - 📖 教程正文：[docs/TUTORIAL.md](docs/TUTORIAL.md)
 - 🖥 渲染效果演示页：[jimmywangjimmy.github.io/deepseek-app-api-tutorial](https://jimmywangjimmy.github.io/deepseek-app-api-tutorial/)
-- 🧪 14 个可运行脚本：[demos/](demos/)
+- 🧪 **浏览器真调测试台**：[jimmywangjimmy.github.io/…/playground/](https://jimmywangjimmy.github.io/deepseek-app-api-tutorial/playground/)
+- 🐍 14 个可运行脚本：[demos/](demos/)
 - 官方发布说明：[api-docs.deepseek.com/news/news261113](https://api-docs.deepseek.com/news/news261113/)
 - 🎙 **真实运行日志**（2026-11-14，真实 key 跑完全部 14 个 demo）：[examples/runs/](examples/runs/)
 
 ![渲染效果预览](https://jimmywangjimmy.github.io/deepseek-app-api-tutorial/preview.png)
 
 > 上图是 `site/index.html` 对**一次真实调用**的渲染：`thinking` 折叠面板 → 搜索卡片（2 个查询词）→ 打开网页卡片 → 带引用角标的回答 → `usage`（input 12,625 / output 1,505 / tool_search 2 / tool_fetch 1）。页面数据来自 [examples/runs/12_full_chatbot.run.txt](examples/runs/12_full_chatbot.run.txt)，不是编造的示例。
+
+---
+
+## 在浏览器里真调：Playground
+
+不想装 Python？打开 [在线测试台](https://jimmywangjimmy.github.io/deepseek-app-api-tutorial/playground/)，填上 key 就能在网页里调所有能力。
+
+![Playground](https://jimmywangjimmy.github.io/deepseek-app-api-tutorial/playground.png)
+
+8 个面板，每个都能切换 **渲染 / 原始响应 / 请求体** 三个视图：
+
+| 面板 | 能测什么 |
+|---|---|
+| 综合对话（三协议） | 一次请求同时开搜索 + 读链 + 安全审核 + 标题 + 日期标记，可在 Messages / Responses / Chat Completions 之间切换 |
+| 多轮与 signature | 第一轮读链接、第二轮追问，直接看到把 `content` 原样回传的效果 |
+| Search API | 语法、`count`、`orient_question`、`rerank_score` / `authority` |
+| Fetch API | 抓页并看 Markdown 正文 |
+| 文件输入 | 上传 PDF/Word/图片 → `file_id` → 提问 |
+| OCR | 选 `purpose`，拿到带 `<|ref|>` / `<|box|>` 的逐页结果 |
+| TTS | 输入文本直接播放 / 下载音频 |
+| ASR | 上传音频看转写 |
+
+技术上是纯静态单页（`site/playground/`，零依赖、零构建）：浏览器直连 `api.deepseek.com`，官方支持 CORS（预检返回 `access-control-allow-origin` 回显、允许 `authorization` / `x-api-key`），所以不需要任何代理。**key 只写进你自己的 localStorage，不经过第三方**；与此同时每次点击都是真实调用、真实计费。
 
 ---
 
@@ -105,7 +129,9 @@ python3 12_full_chatbot.py              # 交互式完整 Chatbot
 │   ├── runs/                 # 2026-11-14 真实调用日志（14 个 demo）
 │   ├── dryrun/               # --dry-run 输出（不需要 key）
 │   └── audio/speech.wav      # TTS 真实产物（6.9 秒，33 万字节）
-└── site/index.html           # 静态渲染演示页（GitHub Pages）
+└── site/
+    ├── index.html            # 渲染效果页（GitHub Pages）
+    └── playground/           # 浏览器真调测试台（纯静态 SPA）
 ```
 
 `examples/` 里是 `--dry-run` 的真实捕获输出，可以直接看到每个请求长什么样，不消耗额度。

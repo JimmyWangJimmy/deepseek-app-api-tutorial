@@ -681,6 +681,12 @@ demos/
 
 全部脚本 `--dry-run` 无 key 可跑，验证请求体；真调用需要 `DEEPSEEK_API_KEY`，按次计费，注意成本。
 
+## 附二：不想写代码？
+
+仓库里还有一个纯静态的浏览器测试台 `site/playground/`：填 key 就能在网页里调 8 个能力（综合对话/多轮/Search/Fetch/文件/OCR/TTS/ASR），每个面板都能看渲染结果、原始响应和请求体。
+
+它靠的是官方 API 支持 CORS——预检返回 `access-control-allow-origin` 回显并允许 `authorization`、`x-api-key`，浏览器可以直连，不需要自建代理。key 存在 localStorage，不会上传到任何第三方。
+
 运行样例：
 
 ```
