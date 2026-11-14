@@ -9,7 +9,7 @@ DeepSeek 在 2026/11/13 把自家 App 的能力全部开成了 API：联网搜�
 - 🧪 14 个可运行脚本：[demos/](demos/)
 - 官方发布说明：[api-docs.deepseek.com/news/news261113](https://api-docs.deepseek.com/news/news261113/)
 
-![渲染效果预览](docs/preview.png)
+![渲染效果预览](https://jimmywangjimmy.github.io/deepseek-app-api-tutorial/preview.png)
 
 > 上图是 `site/index.html` 渲染的一次完整回答：`thinking` 折叠面板 → 搜索卡片（2 个查询词）→ 读链卡片（`signature ✓`）→ 带引用角标的回答 → `usage`。演示页用示例数据静态渲染，不发起真实请求；真实调用见 [demos/](demos/)。
 

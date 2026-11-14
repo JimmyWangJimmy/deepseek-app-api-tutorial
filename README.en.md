@@ -9,7 +9,7 @@ On 2026-11-13 DeepSeek opened the full set of capabilities behind its official a
 - 🧪 14 runnable scripts: [demos/](demos/)
 - Official announcement: [api-docs.deepseek.com/news/news261113](https://api-docs.deepseek.com/news/news261113/)
 
-![Renderer preview](docs/preview.png)
+![Renderer preview](https://jimmywangjimmy.github.io/deepseek-app-api-tutorial/preview.png)
 
 ## The mental model
 
