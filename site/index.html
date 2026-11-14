@@ -1,0 +1,354 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>DeepSeek 全家桶 API · 渲染效果演示</title>
+<meta name="description" content="DeepSeek 全家桶应用 API 的 chat block 渲染效果：thinking / server_tool_use / web_search_tool_result / web_fetch_tool_result / text + citations。">
+<style>
+  :root {
+    --bg: #08090d;
+    --panel: #0f121a;
+    --panel-2: #141925;
+    --line: #232a3a;
+    --text: #e8ebf5;
+    --dim: #8b93a7;
+    --dimmer: #5d6478;
+    --accent: #4d6bfe;
+    --accent-soft: rgba(77, 107, 254, .12);
+    --green: #35d39a;
+    --amber: #f2c14e;
+    --mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; }
+  body {
+    background:
+      radial-gradient(900px 500px at 15% -10%, rgba(77,107,254,.18), transparent 60%),
+      radial-gradient(700px 400px at 110% 10%, rgba(53,211,154,.10), transparent 60%),
+      var(--bg);
+    color: var(--text);
+    font: 15px/1.65 -apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", system-ui, sans-serif;
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+  }
+  .page { max-width: 820px; margin: 0 auto; padding: 40px 20px 72px; }
+
+  .hero { display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; margin-bottom: 6px; }
+  .hero h1 { font-size: 22px; margin: 0; letter-spacing: -.01em; }
+  .hero .tag {
+    font: 11px/1 var(--mono); color: #b9c6ff; background: var(--accent-soft);
+    border: 1px solid rgba(77,107,254,.35); border-radius: 999px; padding: 5px 9px; letter-spacing: .04em;
+  }
+  .sub { color: var(--dim); font-size: 13px; margin: 0 0 22px; }
+  .sub code { font-family: var(--mono); color: #b9c6ff; }
+
+  .shell {
+    background: linear-gradient(180deg, rgba(20,25,37,.92), rgba(15,18,26,.98));
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    box-shadow: 0 24px 70px rgba(0,0,0,.55), inset 0 1px 0 rgba(255,255,255,.03);
+    overflow: hidden;
+  }
+  .topbar {
+    display: flex; align-items: center; gap: 10px;
+    padding: 13px 18px; border-bottom: 1px solid var(--line);
+    background: rgba(12,15,22,.72);
+  }
+  .dots { display: flex; gap: 6px; }
+  .dots i { width: 10px; height: 10px; border-radius: 50%; background: #2c3446; display: block; }
+  .dots i:nth-child(1) { background: #ff5f57; }
+  .dots i:nth-child(2) { background: #febc2e; }
+  .dots i:nth-child(3) { background: #28c840; }
+  .topbar .name { font: 12px/1 var(--mono); color: var(--dim); margin-left: 6px; }
+  .topbar .model {
+    margin-left: auto; font: 11px/1 var(--mono); color: var(--green);
+    border: 1px solid rgba(53,211,154,.3); background: rgba(53,211,154,.08);
+    padding: 4px 8px; border-radius: 999px;
+  }
+
+  .chat { padding: 22px 20px 8px; display: flex; flex-direction: column; gap: 14px; }
+
+  .turn { display: flex; flex-direction: column; gap: 10px; }
+  .user { display: flex; justify-content: flex-end; }
+  .user .bubble {
+    max-width: 78%; background: linear-gradient(180deg, #4d6bfe, #3d57dd);
+    color: #fff; padding: 11px 15px; border-radius: 14px 14px 4px 14px;
+    box-shadow: 0 8px 24px rgba(61,87,221,.32); font-size: 14.5px;
+  }
+
+  .assistant { display: flex; gap: 12px; align-items: flex-start; }
+  .avatar {
+    width: 28px; height: 28px; border-radius: 9px; flex: 0 0 28px; margin-top: 2px;
+    background: linear-gradient(160deg, #4d6bfe, #2a3aa8); display: grid; place-items: center;
+    font: 700 12px/1 var(--mono); color: #dfe6ff; box-shadow: 0 6px 18px rgba(77,107,254,.3);
+  }
+  .body { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 10px; }
+
+  details.thinking {
+    border: 1px dashed #2b3346; border-radius: 12px; background: rgba(255,255,255,.015);
+  }
+  details.thinking > summary {
+    cursor: pointer; list-style: none; padding: 9px 13px; color: var(--dim);
+    font: 12.5px/1.4 var(--mono); display: flex; align-items: center; gap: 8px;
+  }
+  details.thinking > summary::-webkit-details-marker { display: none; }
+  details.thinking .pulse {
+    width: 8px; height: 8px; border-radius: 50%; background: var(--amber);
+    box-shadow: 0 0 0 0 rgba(242,193,78,.6); animation: pulse 2.2s infinite;
+  }
+  details.thinking .txt { padding: 2px 16px 14px; color: #9aa3b8; font-size: 13px; white-space: pre-wrap; }
+
+  .tool {
+    border: 1px solid var(--line); border-left: 3px solid var(--accent);
+    border-radius: 12px; background: var(--panel-2); overflow: hidden;
+  }
+  .tool .head {
+    display: flex; align-items: center; gap: 8px; padding: 10px 13px;
+    font: 12.5px/1.4 var(--mono); color: #c3cbe0; border-bottom: 1px solid rgba(35,42,58,.75);
+  }
+  .tool .head .icon {
+    width: 18px; height: 18px; border-radius: 5px; display: grid; place-items: center;
+    background: var(--accent-soft); color: #a9baff; font-size: 11px;
+  }
+  .tool .head .q { color: var(--dim); font-size: 11.5px; margin-left: auto; }
+  .results { display: flex; flex-direction: column; }
+  .result {
+    display: grid; grid-template-columns: 22px 1fr; gap: 10px; padding: 10px 13px;
+    text-decoration: none; color: inherit; border-top: 1px solid rgba(35,42,58,.55);
+  }
+  .result:first-child { border-top: 0; }
+  .result:hover { background: rgba(77,107,254,.07); }
+  .favicon {
+    width: 20px; height: 20px; border-radius: 5px; background: #1c2334; color: #a9baff;
+    display: grid; place-items: center; font: 700 10px/1 var(--mono); margin-top: 2px;
+  }
+  .result .t { color: #dbe2f5; font-size: 13.5px; display: block; }
+  .result .u { color: var(--dimmer); font: 11.5px/1.5 var(--mono); word-break: break-all; display: block; margin-top: 1px; }
+  .result .sn { color: #8f98ae; font-size: 12.5px; margin-top: 4px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+
+  .tool.fetch { border-left-color: var(--green); }
+  .tool.fetch .head .icon { background: rgba(53,211,154,.12); color: #7ee7bd; }
+  .tool.fetch .head .page { color: #cfe6dd; }
+
+  .answer { font-size: 14.8px; }
+  .answer p { margin: 0 0 10px; }
+  .answer p:last-child { margin-bottom: 0; }
+  .answer strong { color: #fff; }
+  .cite {
+    font: 600 10px/1 var(--mono); color: #b9c6ff; background: var(--accent-soft);
+    border: 1px solid rgba(77,107,254,.35); border-radius: 5px;
+    padding: 2px 4px; margin-left: 2px; vertical-align: 2px; cursor: help;
+    text-decoration: none;
+  }
+  .usage {
+    font: 11.5px/1.7 var(--mono); color: var(--dimmer);
+    border-top: 1px dashed #232a3a; padding-top: 9px;
+  }
+  .usage b { color: #9aa3b8; font-weight: 600; }
+
+  .composer {
+    margin: 18px 20px 20px; display: flex; align-items: center; gap: 10px;
+    border: 1px solid var(--line); border-radius: 14px; padding: 11px 14px;
+    background: rgba(10,13,19,.85); color: var(--dimmer); font-size: 13.5px;
+  }
+  .composer .pill {
+    margin-left: auto; font: 11px/1 var(--mono); color: var(--dim);
+    border: 1px solid var(--line); border-radius: 999px; padding: 5px 9px;
+  }
+
+  .foot { display: flex; gap: 14px; flex-wrap: wrap; align-items: center; margin-top: 18px; color: var(--dimmer); font-size: 12.5px; }
+  .foot a { color: #9fb0ff; text-decoration: none; border-bottom: 1px dotted rgba(159,176,255,.45); }
+  .foot code { font-family: var(--mono); color: #9aa3b8; }
+
+  .enter { animation: rise .45s cubic-bezier(.2,.7,.2,1) both; }
+  .no-anim .enter, .no-anim .pulse { animation: none !important; opacity: 1 !important; transform: none !important; }
+  @keyframes rise { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+  @keyframes pulse { 70% { box-shadow: 0 0 0 7px rgba(242,193,78,0); } 100% { box-shadow: 0 0 0 0 rgba(242,193,78,0); } }
+  @media (prefers-reduced-motion: reduce) { .enter { animation: none; } .pulse { animation: none; } }
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="hero">
+    <h1>DeepSeek 全家桶应用 API · 渲染效果</h1>
+    <span class="tag">STATIC DEMO</span>
+  </div>
+  <p class="sub">
+    这是 <code>deepseek-flash</code> + <code>deepseek_web_search</code> + <code>deepseek_read_url</code> +
+    <code>safety_check</code> 一次请求返回的内容块，按前端应渲染的样子展示。数据为示例，不是实时调用。
+  </p>
+
+  <div class="shell">
+    <div class="topbar">
+      <span class="dots"><i></i><i></i><i></i></span>
+      <span class="name">chat-demo · api.deepseek.com</span>
+      <span class="model">deepseek-flash</span>
+    </div>
+
+    <div class="chat" id="chat"></div>
+
+    <div class="composer">
+      <span>继续追问…</span>
+      <span class="pill">tools: web_search · read_url</span>
+    </div>
+  </div>
+
+  <div class="foot">
+    <span>完整代码：<a href="https://github.com/JimmyWangJimmy/deepseek-app-api-tutorial/blob/main/docs/TUTORIAL.md">docs/TUTORIAL.md</a> · <a href="https://github.com/JimmyWangJimmy/deepseek-app-api-tutorial/tree/main/demos">demos/</a></span>
+    <span>区块：thinking / server_tool_use / web_search_tool_result / web_fetch_tool_result / text+citations</span>
+    <span><a href="#" id="replay">重放动画</a></span>
+  </div>
+</div>
+
+<script>
+const QUESTION = "DeepSeek 这次发布的全家桶 API 到底开放了什么？顺便看下官方公告。";
+
+const THINKING =
+`用户问的是这次发布会开放了什么，需要官方公告原文。
+先搜一次确认发布范围，再打开公告页核对细节，最后把「能力 + 计费 + 坑」三块整理清楚。`;
+
+const SEARCH = {
+  queries: ["DeepSeek 全家桶 API 发布", "deepseek-flash 联网搜索 读链"],
+  results: [
+    {
+      site: "D", title: "DeepSeek 发布全家桶应用 API",
+      url: "api-docs.deepseek.com/zh-cn/news/news261113",
+      snippet: "联网搜索、文件输入、阅读链接、模型安全、ASR、TTS 全面开放，1:1 复刻 App。"
+    },
+    {
+      site: "D", title: "联网工具 · Web Tools",
+      url: "api-docs.deepseek.com/zh-cn/guides/web_tools",
+      snippet: "声明 deepseek_web_search 即开启搜索；开思考后升级为深度思考搜索，最多约 20 次工具调用。"
+    },
+    {
+      site: "G", title: "deepseek-ai/chat-demo",
+      url: "github.com/deepseek-ai/chat-demo",
+      snippet: "官方开源前端 Demo，支持导入 DeepSeek 历史对话。"
+    }
+  ]
+};
+
+const FETCH = { url: "api-docs.deepseek.com/zh-cn/news/news261113/", title: "DeepSeek 发布全家桶应用 API" };
+
+const ANSWER = [
+  `这次开放的核心是<b>把 App 的能力搬进 API</b>：联网搜索、深度思考搜索、文件输入、阅读链接、模型安全审核，加上独立的 OCR / ASR / TTS / Search / Fetch 接口。工具调用与上下文拼接都在服务端完成，客户端只负责渲染内容块。<a class="cite" href="https://api-docs.deepseek.com/zh-cn/news/news261113/" title="DeepSeek 发布全家桶应用 API">1</a>`,
+  `几个真正影响接入方式的点：<b>搜索是否发生由模型决定</b>，<code>tool_choice</code> 不能强制；一旦开启这些能力，<code>temperature</code>、<code>top_p</code> 等采样参数会被服务端接管并忽略；<code>max_tokens</code> 限制的是单步推理而不是整轮输出。<a class="cite" href="https://api-docs.deepseek.com/zh-cn/guides/web_tools" title="联网工具">2</a>`,
+  `多轮对话必须把上一轮 assistant 的 <code>content</code> 原样回传，保留 <code>kind</code> 与 <code>signature</code>——读链的网页正文不在响应里，它加密在 <code>signature</code> 中，丢了网页就不在上下文里了。<a class="cite" href="https://api-docs.deepseek.com/zh-cn/guides/web_tools#multi-turn" title="多轮对话">3</a>`
+];
+
+const USAGE = `input <b>9,078</b> · output <b>1,686</b> · cache_read <b>4,096</b> · tool_search <b>2</b> · tool_fetch <b>1</b>`;
+
+const chat = document.getElementById("chat");
+const staticMode = location.hash.includes("static");
+
+function el(tag, cls, html) {
+  const node = document.createElement(tag);
+  if (cls) node.className = cls;
+  if (html != null) node.innerHTML = html;
+  return node;
+}
+
+function addTurn() {
+  chat.innerHTML = "";
+  const turn = el("div", "turn");
+
+  const user = el("div", "user");
+  user.appendChild(el("div", "bubble", QUESTION));
+  turn.appendChild(user);
+
+  const assistant = el("div", "assistant");
+  assistant.appendChild(el("div", "avatar", "DS"));
+  const body = el("div", "body");
+  assistant.appendChild(body);
+  turn.appendChild(assistant);
+  chat.appendChild(turn);
+  return body;
+}
+
+function renderThinking(body) {
+  const box = el("details", "thinking enter");
+  box.open = true;
+  box.innerHTML = `<summary><span class="pulse"></span>已思考 3.2s · 点击折叠</summary>
+    <div class="txt">${THINKING.replace(/</g, "&lt;")}</div>`;
+  body.appendChild(box);
+  return box;
+}
+
+function renderSearch(body) {
+  const card = el("div", "tool enter");
+  const head = el("div", "head",
+    `<span class="icon">⌕</span><span>deepseek_web_search</span>
+     <span class="q">${SEARCH.queries.length} 个查询词 · kind=search</span>`);
+  card.appendChild(head);
+  const list = el("div", "results");
+  SEARCH.results.forEach((r, i) => {
+    const a = el("a", "result");
+    a.href = "#";
+    a.innerHTML = `<span class="favicon">${r.site}</span>
+      <span><span class="t">${r.title}</span>
+      <span class="u">${r.url}</span>
+      <span class="sn">${r.snippet}</span></span>`;
+    list.appendChild(a);
+  });
+  card.appendChild(list);
+  body.appendChild(card);
+  return card;
+}
+
+function renderFetch(body) {
+  const card = el("div", "tool fetch enter");
+  card.innerHTML = `<div class="head"><span class="icon">↓</span>
+    <span>deepseek_read_url</span>
+    <span class="q">kind=read_link · signature ✓</span></div>
+    <div class="results"><div class="result" style="grid-template-columns:22px 1fr">
+      <span class="favicon">D</span>
+      <span><span class="t">${FETCH.title}</span><span class="u">${FETCH.url}</span></span>
+    </div></div>`;
+  body.appendChild(card);
+  return card;
+}
+
+function renderAnswer(body) {
+  const wrap = el("div", "answer enter");
+  ANSWER.forEach(p => wrap.appendChild(el("p", null, p)));
+  const usage = el("div", "usage enter", `usage · ${USAGE}`);
+  body.appendChild(wrap);
+  body.appendChild(usage);
+  return wrap;
+}
+
+function runAnimated() {
+  const body = addTurn();
+  const steps = [
+    () => renderThinking(body),
+    () => renderSearch(body),
+    () => renderFetch(body),
+    () => renderAnswer(body)
+  ];
+  let i = 0;
+  (function next() {
+    if (i >= steps.length) return;
+    steps[i++]();
+    setTimeout(next, 900);
+  })();
+}
+
+function runStatic() {
+  document.documentElement.classList.add("no-anim");
+  const body = addTurn();
+  renderThinking(body).open = false;
+  renderSearch(body);
+  renderFetch(body);
+  renderAnswer(body);
+}
+
+document.getElementById("replay").addEventListener("click", e => {
+  e.preventDefault();
+  runAnimated();
+});
+
+(staticMode ? runStatic : runAnimated)();
+</script>
+</body>
+</html>

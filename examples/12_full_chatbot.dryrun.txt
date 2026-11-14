@@ -1,0 +1,33 @@
+
+[user] DeepSeek 全家桶 API 能做什么？
+[dry-run] POST https://api.deepseek.com/anthropic/v1/messages
+[dry-run] headers: {'Content-Type': 'application/json', 'x-api-key': '<redacted>'}
+{
+  "model": "deepseek-flash",
+  "tools": [
+    {
+      "type": "deepseek_web_search",
+      "name": "deepseek_web_search"
+    },
+    {
+      "type": "deepseek_read_url",
+      "name": "deepseek_read_url"
+    }
+  ],
+  "messages": [
+    {
+      "role": "latest_reminder",
+      "content": "2026-11-14,星期六,上海,Web,中文"
+    },
+    {
+      "role": "user",
+      "content": "DeepSeek 全家桶 API 能做什么？"
+    }
+  ],
+  "safety_check": {
+    "level": "high"
+  },
+  "title": {
+    "enabled": true
+  }
+}

@@ -1,0 +1,8 @@
+[dry-run] POST https://api.deepseek.com/v1/tools/search
+[dry-run] headers: {'Content-Type': 'application/json', 'Authorization': '<redacted>'}
+{
+  "query": "DeepSeek 全家桶 API site:api-docs.deepseek.com OR site:github.com lang:zh after:2026",
+  "count": 5,
+  "ori_question": "DeepSeek 最近开放了哪些应用能力？",
+  "need_content": false
+}

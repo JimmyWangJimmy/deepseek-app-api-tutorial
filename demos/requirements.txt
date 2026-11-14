@@ -1,0 +1,2 @@
+requests>=2.31
+websockets>=14      # 只有 10_tts.py --ws 需要

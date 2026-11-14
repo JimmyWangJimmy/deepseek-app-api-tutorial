@@ -1,0 +1,24 @@
+# 密钥与本地环境
+.env
+.env.*
+*.key
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.pytest_cache/
+
+# demo 产物
+speech.wav
+speech.pcm
+answer.wav
+fetched.md
+ocr.md
+
+# 编辑器 / 系统
+.DS_Store
+.idea/
+.vscode/
+*.swp
