@@ -1,0 +1,33 @@
+[upload] {
+  "id": "file-api-cdde6646-855d-454d-95a3-2dd02c29d7d0",
+  "object": "file",
+  "bytes": 708967,
+  "created_at": 1794638154,
+  "filename": "pricing.png",
+  "purpose": "rich_layout_recognition"
+}
+
+[answer] **要点总结**
+- 文档为 DeepSeek 工具 API 定价表。
+- 文字/图片搜索：5 元/千次。
+- 网页抓取：5 元/千次。
+- 文字识别：1.5 元/千页。
+- 语音识别：0.39 元/小时。
+- 语音合成：1.5 元/万字符。
+- 语音识别与语音合成当前处于限时 5 折优惠期；划线价为刊例价。
+
+**三个关键数字**
+1. **5 元/千次**：文字/图片搜索、网页抓取价格。
+2. **1.5 元/千页**：文字识别价格。
+3. **0.39 元/小时**：语音识别价格。
+
+usage: {
+  "input_tokens": 249,
+  "cache_creation_input_tokens": 0,
+  "cache_read_input_tokens": 0,
+  "output_tokens": 448,
+  "service_tier": "standard",
+  "output_tokens_details": {
+    "thinking_tokens": 278
+  }
+}

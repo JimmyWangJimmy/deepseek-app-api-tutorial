@@ -8,6 +8,7 @@ On 2026-11-13 DeepSeek opened the full set of capabilities behind its official a
 - 🖥 Rendered demo page: [jimmywangjimmy.github.io/deepseek-app-api-tutorial](https://jimmywangjimmy.github.io/deepseek-app-api-tutorial/)
 - 🧪 14 runnable scripts: [demos/](demos/)
 - Official announcement: [api-docs.deepseek.com/news/news261113](https://api-docs.deepseek.com/news/news261113/)
+- 🎙 Real run logs (2026-11-14, all 14 demos with a live key): [examples/runs/](examples/runs/)
 
 ![Renderer preview](https://jimmywangjimmy.github.io/deepseek-app-api-tutorial/preview.png)
 
@@ -32,6 +33,7 @@ The same capabilities work across `Messages` (`/anthropic/v1/messages`), `Respon
 | You cannot force a search | `tool_choice` rejects the built-in tool names; `"none"` disables URL reading too |
 | HTTP 200 can still be a failure | Mid-generation errors arrive in the body, and search/fetch done before the failure is still billed |
 | Chinese TTS bills double | A CJK character counts as 2 billable characters |
+| Thinking is on by default | `deepseek-flash` treats a missing `thinking` as enabled, so you get `kind=deep_search`; send `{"thinking": {"type": "disabled"}}` for plain web search |
 
 ## Quick start
 
@@ -75,7 +77,8 @@ Every script supports `--dry-run` and `--show-thinking`.
 ├── docs/TUTORIAL.md    # 19-chapter tutorial (Chinese)
 ├── docs/preview.png    # rendered effect preview
 ├── demos/              # 14 scripts + common.py
-├── examples/           # captured --dry-run output
+├── examples/runs/      # real 2026-11-14 run logs (14 demos)
+├── examples/dryrun/    # captured --dry-run output
 └── site/index.html     # static renderer demo (GitHub Pages)
 ```
 

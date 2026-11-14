@@ -10,12 +10,12 @@ __pycache__/
 venv/
 .pytest_cache/
 
-# demo 产物
-speech.wav
-speech.pcm
-answer.wav
-fetched.md
-ocr.md
+# demo 产物（examples/ 下的留存样例不受影响）
+/demos/speech.wav
+/demos/speech.pcm
+/demos/answer.wav
+/demos/fetched.md
+/demos/ocr.md
 
 # 编辑器 / 系统
 .DS_Store

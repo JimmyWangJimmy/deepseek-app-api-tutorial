@@ -8,10 +8,11 @@ DeepSeek 在 2026/11/13 把自家 App 的能力全部开成了 API：联网搜�
 - 🖥 渲染效果演示页：[jimmywangjimmy.github.io/deepseek-app-api-tutorial](https://jimmywangjimmy.github.io/deepseek-app-api-tutorial/)
 - 🧪 14 个可运行脚本：[demos/](demos/)
 - 官方发布说明：[api-docs.deepseek.com/news/news261113](https://api-docs.deepseek.com/news/news261113/)
+- 🎙 **真实运行日志**（2026-11-14，真实 key 跑完全部 14 个 demo）：[examples/runs/](examples/runs/)
 
 ![渲染效果预览](https://jimmywangjimmy.github.io/deepseek-app-api-tutorial/preview.png)
 
-> 上图是 `site/index.html` 渲染的一次完整回答：`thinking` 折叠面板 → 搜索卡片（2 个查询词）→ 读链卡片（`signature ✓`）→ 带引用角标的回答 → `usage`。演示页用示例数据静态渲染，不发起真实请求；真实调用见 [demos/](demos/)。
+> 上图是 `site/index.html` 对**一次真实调用**的渲染：`thinking` 折叠面板 → 搜索卡片（2 个查询词）→ 打开网页卡片 → 带引用角标的回答 → `usage`（input 12,625 / output 1,505 / tool_search 2 / tool_fetch 1）。页面数据来自 [examples/runs/12_full_chatbot.run.txt](examples/runs/12_full_chatbot.run.txt)，不是编造的示例。
 
 ---
 
@@ -27,6 +28,7 @@ DeepSeek 在 2026/11/13 把自家 App 的能力全部开成了 API：联网搜�
 | **搜索是否发生不由你决定** | `tool_choice` 不能强制指定联网工具，`"none"` 会把读链一起关掉 |
 | **200 也可能是失败** | 生成中途出错时 HTTP 已是 200，错误在响应体里，且失败前的搜索/抓取照常计费 |
 | **中文 TTS 按双倍字符计费** | 汉字算 2 个计费字符，英文算 1 个 |
+| **默认就是思考模式** | `deepseek-flash` 不传 `thinking` 时按开启处理：`kind` 全是 `deep_search`。要标准联网搜索（`kind=search`）必须显式 `{"thinking": {"type": "disabled"}}` |
 
 ---
 
@@ -99,7 +101,10 @@ python3 12_full_chatbot.py              # 交互式完整 Chatbot
 │   ├── preview.png           # 渲染效果预览
 │   └── pricing.png           # 官方定价表
 ├── demos/                    # 14 个可运行脚本 + common.py
-├── examples/                 # --dry-run 的真实输出样例
+├── examples/
+│   ├── runs/                 # 2026-11-14 真实调用日志（14 个 demo）
+│   ├── dryrun/               # --dry-run 输出（不需要 key）
+│   └── audio/speech.wav      # TTS 真实产物（6.9 秒，33 万字节）
 └── site/index.html           # 静态渲染演示页（GitHub Pages）
 ```
 
@@ -112,6 +117,31 @@ python3 12_full_chatbot.py              # 交互式完整 Chatbot
 `site/index.html` 是纯静态单文件，不依赖 CDN、不需要 key：把 `demos/` 里 `01 → 02 → 03` 的输出结构（thinking、搜索卡片、读链卡片、带引用正文、usage）用前端渲染出来，用来对齐「内容块 → UI」的映射。加 `#static` 后缀可关闭动画一次性渲染（截图用）。
 
 想换成真实数据：跑 `demos/12_full_chatbot.py`，把返回的 `content` 数组按同样的 block 类型渲染即可。
+
+---
+
+## 真实运行记录（2026-11-14）
+
+14 个 demo 全部用真实 key 跑过一遍，原始日志在 [examples/runs/](examples/runs/)：
+
+| Demo | 真实结果 |
+|---|---|
+| 01 web_search | `kind=search`，2 个查询词，10 条引用，`tool_search=2` |
+| 02 deep_thinking_search | 7 次工具调用（3 search + 4 open_page），推出「东京塔 333m > 埃菲尔铁塔 330m」 |
+| 03 read_url | `kind=read_link`，读 1 页，`tool_fetch=1` |
+| 04 file_input | 上传定价表图片并总结出三个价格要点 |
+| 05 safety_check | `safety_tokens=7`，未触发拒答 |
+| 06 title | 生成标题「北京明天带伞建议」 |
+| 07 latest_reminder | 注入 `2026-11-14,星期六,上海,Web,中文` |
+| 08 search_fetch | 朴素查询 5 条 `rerank_score>=1.5`；Fetch 拿到 1,613 字符 Markdown |
+| 09 ocr | 1 页，输出含 `<|ref|>` / `<|box|>` 与表格结构 |
+| 10 tts | 生成 330,284 字节 wav |
+| 11 asr | 转写回「你好，我是DeepSeek。这段语音由语音合成接口生成…」，6,880 ms |
+| 12 full_chatbot | `title=读链与搜索区别`，input 12,625 / output 1,505 |
+| 13 chat_completions | `server_tool_calls` 2 步、10 条 `url_citation` 注解 |
+| 14 responses_api | 5 个 `web_search_call` item，`status=completed` |
+
+这次实跑也修正了教程里的一处认知：`deepseek-flash` **默认开启思考**，01 号 demo 最初没传 `thinking` 时返回的是 `deep_search` 而不是 `search`，加上 `{"type": "disabled"}` 才拿到标准联网搜索。
 
 ---
 

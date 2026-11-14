@@ -1,0 +1,98 @@
+
+[user] DeepSeek 全家桶 API 里，读链和搜索有什么区别？顺便看下 https://api-docs.deepseek.com/zh-cn/guides/web_tools
+  [thinking]（折叠面板，不展示内容）
+  [tool] deep_search: open_page https://api-docs.deepseek.com/zh-cn/guides/web_tools
+  [tool] deep_search: search ['DeepSeek API 读链 搜索 区别', 'DeepSeek 全家桶 API web tools 使用说明']
+    · 读页 https://api-docs.deepseek.com/zh-cn/guides/web_tools  title='联网工具'
+    ·  — DeepSeek https://api-docs.deepseek.com/guides/web_tools.md
+    · 构建 Chatbot | DeepSeek API Docs — DeepSeek https://api-docs.deepseek.com/zh-cn/guides/build_a_chatbot/
+    · 联网工具 — DeepSeek https://api-docs.deepseek.com/zh-cn/guides/web_tools/
+    · 格局！刚刚 DeepSeek 正式开放全家桶 API，咱都能复刻 DeepSeek App 了？ — 阿里云开发者社区 https://developer.aliyun.com/article/1783545
+    · DeepSeek 发布全家桶应用 API — Sohu https://www.sohu.com/a/1101274628_100106801?scm=10001.7746_13-119000.0.0-0-0-0-0.0&spm=smpc.channel_354.block3_32_P7Ovbu_1_fd.2.1794588145124aI4GUIZ_7746
+    · DeepSeek 把 App 能力开放给开发者，连聊天前端也开源了 — 阿里云开发者社区 https://developer.aliyun.com/article/1783452
+    · DeepSeek 全家桶 API 开放：2 个联网工具与 5 元千次计费 — 华军软件园 https://www.onlinedown.net/article/10048451.htm
+    · DeepSeek 全家桶 API 开放：搜索、读文件、语音都齐活了 - 系统极客 — 系统极客 https://www.sysgeek.cn/deepseek-full-suite-api/
+    · DeepSeek开放App同款搜索，千次调用5元 - News - Cocoloop — Meta 眼镜 NameTag 可看一眼叫出陌生人名字 - News - Cocoloop https://news.cocoloop.cn/2026/11/deepseek-app-api-search-fetch/
+    · DeepSeek开放“全家桶”应用API，开发者可1:1复刻完整App — 凤凰网 https://ishare.ifeng.com/c/s/v0069M--PerMb1L3oHwMy--Jd-_W6l2CgdrNd8SzZDrDHoG88FF1CR7nsupN4ttdEVzZQ21
+    · DeepSeek发布全家桶应用API — 全天候科技 https://awtmt.com/articles/3785916
+    · Web Tools | DeepSeek API Docs — DeepSeek https://api-docs.deepseek.com/guides/web_tools/
+    · DeepSeek开放“全家桶”应用API，开发者可1:1复刻完整App — 凤凰网科技 https://tech.ifeng.com/c/8y1oEDGtTEh##
+    · DeepSeek开放全家桶应用API 底层能力可单独调用 —  https://www.itsdw.cn/news/48177.html
+    · DeepSeek发布全家桶应用API：开发者将能1:1复刻完整DeepSeek App — 凤凰网科技 https://tech.ifeng.com/c/8y1pujRn4tY
+  [thinking]（折叠面板，不展示内容）
+  [tool] deep_search: open_page https://api-docs.deepseek.com/zh-cn/guides/web_tools
+  [tool] deep_search: open_page https://api-docs.deepseek.com/zh-cn/guides/web_tools
+  [tool] deep_search: open_page https://api-docs.deepseek.com/zh-cn/guides/web_tools
+  [tool] deep_search: open_page https://developer.aliyun.com/article/1783545
+  [tool] deep_search: open_page https://www.onlinedown.net/article/10048451.htm
+  [tool] deep_search: find_in_page https://api-docs.deepseek.com/zh-cn/guides/web_tools
+  [tool] deep_search: find_in_page https://api-docs.deepseek.com/zh-cn/guides/web_tools
+    · 读页 https://api-docs.deepseek.com/zh-cn/guides/web_tools  title=None
+    · 读页 https://api-docs.deepseek.com/zh-cn/guides/web_tools  title=None
+    · 读页 https://api-docs.deepseek.com/zh-cn/guides/web_tools  title=None
+    · 读页 https://api-docs.deepseek.com/zh-cn/guides/web_tools  title=None
+    · 读页 https://api-docs.deepseek.com/zh-cn/guides/web_tools  title=None
+    · 读页 https://www.onlinedown.net/article/10048451.htm  title='DeepSeek 全家桶 API 开放：2 个联网工具与 5 元千次计费'
+    · 读页 https://developer.aliyun.com/article/1783545  title='格局！刚刚 DeepSeek 正式开放全家桶 API，咱都能复刻 DeepSeek App 了？'
+  [thinking]（折叠面板，不展示内容）
+    [cite] https://api-docs.deepseek.com/zh-cn/guides/web_tools
+    [cite] https://www.onlinedown.net/article/10048451.htm
+    [cite] https://api-docs.deepseek.com/zh-cn/guides/web_tools
+    [cite] https://api-docs.deepseek.com/zh-cn/guides/web_tools
+    [cite] https://api-docs.deepseek.com/zh-cn/guides/web_tools
+    [cite] https://api-docs.deepseek.com/zh-cn/guides/web_tools
+    [cite] https://api-docs.deepseek.com/zh-cn/guides/web_tools
+    [cite] https://api-docs.deepseek.com/zh-cn/guides/web_tools
+    [cite] https://api-docs.deepseek.com/zh-cn/guides/web_tools
+    [cite] https://api-docs.deepseek.com/zh-cn/guides/web_tools
+    [cite] https://api-docs.deepseek.com/zh-cn/guides/web_tools
+    [cite] https://www.onlinedown.net/article/10048451.htm
+    [cite] https://api-docs.deepseek.com/zh-cn/guides/web_tools
+    [cite] https://www.onlinedown.net/article/10048451.htm
+  [usage] in=12625 out=1505 search=2 fetch=1
+[answer] 根据 DeepSeek 官方文档，“读链”和“搜索”是两种定位不同的能力，核心区别在于**由谁来决定“看什么”**。
+
+### 🎯 核心区别：主动权在谁手里？
+
+*   **读链 (`deepseek_read_url`)**：**主动权在用户**。模型只阅读你在消息中明确给出的链接。你让它读什么，它就分析什么，像一位专注的“文档解析专家”。
+*   **搜索 (`deepseek_web_search`)**：**主动权在模型**。模型根据你的问题，**自己判断**是否需要搜索，并自主生成查询词、寻找和筛选信息。它像一位主动的“信息侦探”。
+
+### 📊 两者对比一览
+
+| 特性 | 读链 (`deepseek_read_url`) | 搜索 (`deepseek_web_search`) |
+| :--- | :--- | :--- |
+| **核心功能** | 抓取并阅读用户消息中**指定URL**的网页内容 | 模型根据问题**自主发起**网络搜索 |
+| **信息源头** | 用户提供的**固定链接** | 模型自行生成的**查询词**（`input.queries`） |
+| **主动权** | **用户**（读你给的链接） | **模型**（自己决定搜什么、搜不搜） |
+| **典型场景** | 你有一篇具体的文章、报告或新闻链接，需要模型基于此内容进行分析、总结或问答。 | 你问一个开放性问题（如“今天上海天气”），模型需要主动上网查找最新信息。 |
+| **触发条件** | 最后一条用户消息中包含URL，且**未同时**开启“思考+搜索”模式。 | 模型判断需要联网搜索时自动触发。 |
+| **工具声明** | 声明 `deepseek_read_url` | 声明 `deepseek_web_search` |
+| **响应块类型** | `server_tool_use` (action: `read_link`)， `web_fetch_tool_result` (kind: `read_link`) | `server_tool_use` (action: `search`)， `web_search_tool_result` (kind: `search`) |
+
+### ⚙️ 关键机制解读
+
+#### 读链：精准的“阅读理解”
+它的工作方式非常直接：模型会扫描你最后一条消息，识别出其中的URL（最多考虑前10个不同链接），然后抓取网页正文，结合上下文来回答你的问题。
+
+#### 搜索：自主的“信息检索”
+搜索会根据是否开启“思考”模式，表现出两种不同的智能水平：
+
+1.  **标准联网搜索（关闭思考）**：模型判断需要搜索时，会生成一个或多个查询词，直接进行搜索，并基于搜索结果（附带引用）来回答。
+2.  **深度思考搜索（开启思考）**：这是更强大的模式。模型会在**多步推理过程中**，自主地**搜索 → 打开网页 → 在页面内查找**，反复求证，最多可调用约20次工具。这更像一个研究过程，而不仅仅是单次查询。
+
+### 🔗 两者的关系与互斥规则
+
+理解它们的关系，可以帮你更好地控制模型的行为：
+
+*   **可以独立使用**：只声明 `deepseek_read_url`，模型就只读链接不搜索。
+*   **深度搜索会“接管”读链**：**当同时开启“思考”模式并声明 `deepseek_web_search` 时，模型会进入“深度思考搜索”模式，此时它不会单独去执行读链任务**，而是将打开网页作为其搜索求证过程的一部分。
+*   **重要限制**：你不能通过 `tool_choice` 参数来**强制**模型使用搜索或读链，否则会报错。是否使用这些工具由模型自行判断。
+
+### 💎 总结
+
+可以这样选择：
+*   想**精读一份指定材料**，用**读链**。
+*   想**探索一个未知问题**，让模型自己去找信息，用**搜索**。
+*   如果问题复杂，需要模型**像研究员一样反复查证**，就开启**“思考+搜索”**，进入深度思考搜索模式。
+
+[title] '读链与搜索区别'

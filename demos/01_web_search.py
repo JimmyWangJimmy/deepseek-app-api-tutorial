@@ -9,6 +9,8 @@ from common import MODEL, stream_messages
 
 payload = {
     "model": MODEL,
+    # deepseek-flash 默认开启思考（不传 thinking = enabled），要真正的"联网搜索"必须显式关掉
+    "thinking": {"type": "disabled"},
     "tools": [{"type": "deepseek_web_search", "name": "deepseek_web_search"}],
     "messages": [{"role": "user", "content": "DeepSeek V4.1 是什么时候发布的？有哪些新能力？"}],
 }

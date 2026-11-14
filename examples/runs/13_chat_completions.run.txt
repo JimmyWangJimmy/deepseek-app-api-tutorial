@@ -1,0 +1,56 @@
+
+[tool-event] step_reasoning_done step=0 call=null
+
+[tool-event] call_started step=0 call={"type": "open_page", "url": "https://api-docs.deepseek.com/zh-cn/guides/web_tools"}
+
+[tool-event] call_started step=0 call={"type": "search", "queries": ["DeepSeek API 搜索 读链 区别", "DeepSeek web_tools 搜索 读链 参数说明"]}
+
+[tool-event] call_completed step=0 call=null
+
+[tool-event] call_completed step=0 call=null
+
+[tool-event] step_reasoning_done step=1 call=null
+
+[tool-event] call_started step=1 call={"type": "open_page", "url": "https://api-docs.deepseek.com/zh-cn/guides/web_tools/"}
+
+[tool-event] call_started step=1 call={"type": "open_page", "url": "https://api-docs.deepseek.com/zh-cn/guides/build_a_chatbot/"}
+
+[tool-event] call_started step=1 call={"type": "open_page", "url": "https://news.cocoloop.cn/2026/11/deepseek-app-api-search-fetch/"}
+
+[tool-event] call_completed step=1 call=null
+
+[tool-event] call_completed step=1 call=null
+
+[tool-event] call_completed step=1 call=null
+在 DeepSeek 的全家桶 API 中，“搜索”（`deepseek_web_search`）和“读链”（`deepseek_read_url`）是**两个独立、可分别声明的工具**，它们的核心区别在于：**搜索是主动去互联网上寻找新信息，而读链是专门针对用户已提供的特定链接进行内容提取和解读。**
+
+### 🔍 核心区别一览
+
+| 对比维度 | **联网搜索 (deepseek_web_search)** | **阅读链接 (deepseek_read_url)** |
+| :--- | :--- | :--- |
+| **核心功能** | 模型根据你的提问，**主动发起**网页或图片搜索，找到相关信息并附上引用来源来回答。 | 模型**自动识别**你消息中已包含的URL链接，抓取该网页的内容，并基于此内容来回答。 |
+| **触发方式** | 需要在请求的 `tools` 中声明 `deepseek_web_search` 工具。 | 需要在请求的 `tools` 中声明 `deepseek_read_url` 工具。 |
+| **工作模式** | 有两种模式：<br>• **非思考模式**：模型自动判断是否搜索，并直接给出带引用的回答。<br>• **思考模式**：模型在多步推理中**自主决定**何时搜索、打开网页、在页内查找，边推理边求证。 | 模型会自动提取并阅读你消息中的链接。有资料指出，它最多可以查看**前10个不同的URL**。 |
+| **核心用途** | 回答**通用性问题**，需要从互联网上获取最新或未知的信息时使用。 | 处理**特定网页内容**，当你已经有一个或几个明确的链接，需要模型基于这些页面的内容来回答问题时使用。 |
+| **调用控制** | 不能通过 `tool_choice` 强制模型必须搜索或必须读链，搜不搜、读不读**完全由模型根据上下文判断**。试图强制指定会返回错误（400）。 | 同上。不过，如果**只声明 `deepseek_read_url`** 而不声明搜索工具，模型就**只**执行读链操作。 |
+
+### 💡 补充说明
+
+*   **可以配合使用**：两个工具可以同时在 `tools` 中声明。在**思考模式**下，模型可能会先搜索找到一些链接，然后自动调用“读链”能力去深入阅读这些网页，形成一个“边搜边读、边推理边求证”的闭环。
+*   **与独立接口的区别**：上述两个工具是在**对话过程中由模型自主调用的**。如果你希望在程序里**以编程方式直接、强制地**调用搜索和抓取功能，应该使用 DeepSeek 提供的独立的“**网页搜索与抓取**”接口。
+[end] finish_reason=stop title='搜索读链区别'
+usage: {"prompt_tokens": 13543, "completion_tokens": 1006, "total_tokens": 14549, "prompt_tokens_details": {"cached_tokens": 5504}, "completion_tokens_details": {"reasoning_tokens": 127, "safety_tokens": 13}, "prompt_cache_hit_tokens": 5504, "prompt_cache_miss_tokens": 8039, "server_tool_use": {"tool_search": 2, "tool_fetch": 1, "tool_image_search": 0}}
+
+
+==== 汇总 ====
+title: 搜索读链区别
+- step 0 reasoning=True
+    deep_search      {"type": "open_page", "url": "https://api-docs.deepseek.com/zh-cn/guides/web_tools"} status=completed signature=无
+    deep_search      {"type": "search", "queries": ["DeepSeek API 搜索 读链 区别", "DeepSeek web_tools 搜索 读链 参数说明"]} status=completed signature=无
+- step 1 reasoning=True
+    deep_search      {"type": "open_page", "url": "https://api-docs.deepseek.com/zh-cn/guides/web_tools/"} status=completed signature=无
+    deep_search      {"type": "open_page", "url": "https://api-docs.deepseek.com/zh-cn/guides/build_a_chatbot/"} status=completed signature=无
+    deep_search      {"type": "open_page", "url": "https://news.cocoloop.cn/2026/11/deepseek-app-api-search-fetch/"} status=completed signature=无
+引用: ['https://api-docs.deepseek.com/zh-cn/guides/web_tools/', 'https://api-docs.deepseek.com/zh-cn/guides/web_tools/', 'https://api-docs.deepseek.com/zh-cn/guides/web_tools/', 'https://api-docs.deepseek.com/zh-cn/guides/web_tools/', 'https://api-docs.deepseek.com/zh-cn/guides/web_tools/', 'https://news.cocoloop.cn/2026/11/deepseek-app-api-search-fetch/', 'https://api-docs.deepseek.com/zh-cn/guides/web_tools/', 'https://api-docs.deepseek.com/zh-cn/guides/web_tools/', 'https://api-docs.deepseek.com/zh-cn/guides/web_tools/', 'https://api-docs.deepseek.com/zh-cn/guides/web_tools/']
+
+注意：多轮时要把 server_tool_calls 连同 signature 原样回传，否则读过的网页不再进上下文。

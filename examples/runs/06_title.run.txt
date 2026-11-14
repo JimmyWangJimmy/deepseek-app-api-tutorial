@@ -1,0 +1,8 @@
+usage: {"input_tokens": 7060, "cache_creation_input_tokens": 0, "cache_read_input_tokens": 4352, "output_tokens": 623, "service_tier": "standard", "server_tool_use": {"web_search_requests": 1, "web_fetch_requests": 5, "tool_search": 2, "tool_fetch": 0, "tool_image_search": 0}, "output_tokens_details": {"thinking_tokens": 178}}
+
+
+[title] '北京明天带伞建议'
+
+要点：
+- 回答结束后最多等标题 5 秒，响应才结束
+- 标题不计费；拒答或出错时可能没有

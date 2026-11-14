@@ -129,10 +129,12 @@ def sse(resp: requests.Response) -> Iterator[tuple[str, dict]]:
     Responses 协议的 event 行就是事件名。注释行（: keep-alive）直接跳过。
     """
     event = ""
-    for raw in resp.iter_lines(decode_unicode=True):
-        if raw is None:
+    # SSE 响应通常不带 charset，requests 会按 ISO-8859-1 解码成乱码；这里强制按 UTF-8
+    resp.encoding = "utf-8"
+    for chunk in resp.iter_lines():                     # bytes，自己解码
+        if chunk is None:
             continue
-        line = raw.strip()
+        line = chunk.decode("utf-8", "replace").strip()
         if not line:
             event = ""
             continue

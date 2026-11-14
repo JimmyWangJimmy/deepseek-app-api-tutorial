@@ -172,11 +172,13 @@
 <div class="page">
   <div class="hero">
     <h1>DeepSeek 全家桶应用 API · 渲染效果</h1>
-    <span class="tag">STATIC DEMO</span>
+    <span class="tag">LIVE RUN · 2026-11-14</span>
   </div>
   <p class="sub">
-    这是 <code>deepseek-flash</code> + <code>deepseek_web_search</code> + <code>deepseek_read_url</code> +
-    <code>safety_check</code> 一次请求返回的内容块，按前端应渲染的样子展示。数据为示例，不是实时调用。
+    下面这一次请求是<b>真实调用</b>的录音：<code>deepseek-flash</code> + 思考 + <code>deepseek_web_search</code> +
+    <code>deepseek_read_url</code> + <code>safety_check: high</code>，问题里带了一个链接。
+    内容块按前端该有的样子渲染；原始日志见
+    <a href="https://github.com/JimmyWangJimmy/deepseek-app-api-tutorial/blob/main/examples/runs/12_full_chatbot.run.txt" style="color:#9fb0ff">examples/12_full_chatbot.run.txt</a>。
   </p>
 
   <div class="shell">
@@ -196,48 +198,47 @@
 
   <div class="foot">
     <span>完整代码：<a href="https://github.com/JimmyWangJimmy/deepseek-app-api-tutorial/blob/main/docs/TUTORIAL.md">docs/TUTORIAL.md</a> · <a href="https://github.com/JimmyWangJimmy/deepseek-app-api-tutorial/tree/main/demos">demos/</a></span>
-    <span>区块：thinking / server_tool_use / web_search_tool_result / web_fetch_tool_result / text+citations</span>
+    <span>真实调用：deepseek-flash · 思考 + 搜索 + 读链 + 安全审核 · 2026-11-14</span>
     <span><a href="#" id="replay">重放动画</a></span>
   </div>
 </div>
 
 <script>
-const QUESTION = "DeepSeek 这次发布的全家桶 API 到底开放了什么？顺便看下官方公告。";
+const QUESTION = "DeepSeek 全家桶 API 里，读链和搜索有什么区别？顺便看下 https://api-docs.deepseek.com/zh-cn/guides/web_tools";
 
-const THINKING =
-`用户问的是这次发布会开放了什么，需要官方公告原文。
-先搜一次确认发布范围，再打开公告页核对细节，最后把「能力 + 计费 + 坑」三块整理清楚。`;
+const THINKING = "（本次录制未保存思考原文；模型的思考 Token 为 1505 输出中的一部分）";
 
 const SEARCH = {
-  queries: ["DeepSeek 全家桶 API 发布", "deepseek-flash 联网搜索 读链"],
+  queries: ["DeepSeek API 读链 搜索 区别", "DeepSeek 全家桶 API web tools 使用说明"],
   results: [
     {
-      site: "D", title: "DeepSeek 发布全家桶应用 API",
-      url: "api-docs.deepseek.com/zh-cn/news/news261113",
-      snippet: "联网搜索、文件输入、阅读链接、模型安全、ASR、TTS 全面开放，1:1 复刻 App。"
-    },
-    {
-      site: "D", title: "联网工具 · Web Tools",
+      site: "D", title: "联网工具 | DeepSeek API Docs",
       url: "api-docs.deepseek.com/zh-cn/guides/web_tools",
-      snippet: "声明 deepseek_web_search 即开启搜索；开思考后升级为深度思考搜索，最多约 20 次工具调用。"
+      snippet: "两个服务端工具：deepseek_web_search 负责联网搜索，deepseek_read_url 负责阅读用户消息中的链接。"
     },
     {
-      site: "G", title: "deepseek-ai/chat-demo",
-      url: "github.com/deepseek-ai/chat-demo",
-      snippet: "官方开源前端 Demo，支持导入 DeepSeek 历史对话。"
+      site: "A", title: "格局！刚刚 DeepSeek 正式开放全家桶 API，咱都能复刻 DeepSeek App 了？",
+      url: "developer.aliyun.com/article/1783545",
+      snippet: "13 日晚间正式开放全家桶应用 API，搜索、文件、语音、安全全部内置，官方还开源了聊天前端。"
+    },
+    {
+      site: "S", title: "DeepSeek 发布全家桶应用 API",
+      url: "www.sohu.com/a/1101274628_100106801",
+      snippet: "在原有 API 中开启对应参数，即可获得深度思考搜索、文件输入等对话功能。"
     }
   ]
 };
 
-const FETCH = { url: "api-docs.deepseek.com/zh-cn/news/news261113/", title: "DeepSeek 发布全家桶应用 API" };
+const FETCH = { url: "api-docs.deepseek.com/zh-cn/guides/web_tools", title: "联网工具" };
 
 const ANSWER = [
-  `这次开放的核心是<b>把 App 的能力搬进 API</b>：联网搜索、深度思考搜索、文件输入、阅读链接、模型安全审核，加上独立的 OCR / ASR / TTS / Search / Fetch 接口。工具调用与上下文拼接都在服务端完成，客户端只负责渲染内容块。<a class="cite" href="https://api-docs.deepseek.com/zh-cn/news/news261113/" title="DeepSeek 发布全家桶应用 API">1</a>`,
-  `几个真正影响接入方式的点：<b>搜索是否发生由模型决定</b>，<code>tool_choice</code> 不能强制；一旦开启这些能力，<code>temperature</code>、<code>top_p</code> 等采样参数会被服务端接管并忽略；<code>max_tokens</code> 限制的是单步推理而不是整轮输出。<a class="cite" href="https://api-docs.deepseek.com/zh-cn/guides/web_tools" title="联网工具">2</a>`,
-  `多轮对话必须把上一轮 assistant 的 <code>content</code> 原样回传，保留 <code>kind</code> 与 <code>signature</code>——读链的网页正文不在响应里，它加密在 <code>signature</code> 中，丢了网页就不在上下文里了。<a class="cite" href="https://api-docs.deepseek.com/zh-cn/guides/web_tools#multi-turn" title="多轮对话">3</a>`
+  `根据官方文档，“读链”和“搜索”是两种定位不同的能力，核心区别在于<b>由谁来决定“看什么”</b>。<a class="cite" href="https://api-docs.deepseek.com/zh-cn/guides/web_tools" title="联网工具">1</a>`,
+  `<b>读链 <code>deepseek_read_url</code></b>：主动权在用户。模型只阅读你在消息里明确给出的链接（最多前 10 个不同 URL），像一位专注的文档解析专家。<a class="cite" href="https://api-docs.deepseek.com/zh-cn/guides/web_tools#read-links" title="阅读链接">2</a>`,
+  `<b>搜索 <code>deepseek_web_search</code></b>：主动权在模型。它自己判断要不要搜、生成查询词，关思考时是“搜一次带引用作答”，开思考后升级为多步的<b>深度思考搜索</b>（搜索 → 打开网页 → 页内查找，最多约 20 次工具调用）。<a class="cite" href="https://api-docs.deepseek.com/zh-cn/guides/web_tools#search-while-thinking" title="深度思考搜索">3</a>`,
+  `两者的关系有一条容易忽略的规则：<b>同时开启思考并声明了搜索工具时，本轮走深度思考搜索，读链不单独执行</b>；想让读链生效就关思考或只声明 <code>deepseek_read_url</code>。另外 <code>tool_choice</code> 不能强制指定这两个工具。<a class="cite" href="https://api-docs.deepseek.com/zh-cn/guides/web_tools#declare-tools" title="声明工具">4</a>`
 ];
 
-const USAGE = `input <b>9,078</b> · output <b>1,686</b> · cache_read <b>4,096</b> · tool_search <b>2</b> · tool_fetch <b>1</b>`;
+const USAGE = `input <b>12,625</b> · output <b>1,505</b> · tool_search <b>2</b> · tool_fetch <b>1</b> · model <b>deepseek-flash</b>`;
 
 const chat = document.getElementById("chat");
 const staticMode = location.hash.includes("static");
@@ -300,7 +301,7 @@ function renderFetch(body) {
   const card = el("div", "tool fetch enter");
   card.innerHTML = `<div class="head"><span class="icon">↓</span>
     <span>deepseek_read_url</span>
-    <span class="q">kind=read_link · signature ✓</span></div>
+    <span class="q">kind=deep_search · open_page</span></div>
     <div class="results"><div class="result" style="grid-template-columns:22px 1fr">
       <span class="favicon">D</span>
       <span><span class="t">${FETCH.title}</span><span class="u">${FETCH.url}</span></span>

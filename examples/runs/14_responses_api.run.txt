@@ -1,0 +1,71 @@
+
+[tool] kind=deep_search action={"type": "open_page", "url": "https://api-docs.deepseek.com/zh-cn/news/news261113/"}
+
+[tool] kind=deep_search action={"type": "search", "queries": ["DeepSeek V4.1 新功能", "DeepSeek V4.1 更新内容 2026", "DeepSeek V4.1 release notes", "site:api-docs.deepseek.com news261113"]}
+  · done https://api-docs.deepseek.com/zh-cn/news/news261113/ sig=无
+  · done  sig=无
+
+[tool] kind=deep_search action={"type": "open_page", "url": "https://www.sohu.com/a/1101392359_260616?scm=10001.7746_13-119000.0.0-0-0-0-0.0&spm=smpc.channel_354.block3_32_P7Ovbu_1_fd.45.1794619037199tV5lgRF_7746"}
+
+[tool] kind=deep_search action={"type": "open_page", "url": "https://api-docs.deepseek.com/zh-cn/news/news261017/"}
+
+[tool] kind=deep_search action={"type": "open_page", "url": "https://api-docs.deepseek.com/news/news261017/"}
+  · done https://api-docs.deepseek.com/zh-cn/news/news261017/ sig=无
+  · done https://www.sohu.com/a/1101392359_260616?scm=10001.7746_13-119000.0.0-0-0-0-0.0&spm=smpc.channel_354.block3_32_P7Ovbu_1_fd.45.1794619037199tV5lgRF_7746 sig=无
+  · done https://api-docs.deepseek.com/news/news261017/ sig=无
+
+[answer] DeepSeek V4.1 系列（特别是 V4.1-Flash）的核心进化在于，**将强大的模型能力与开箱即用的完整应用工具链相结合**，大幅降低了开发者构建高级 AI 应用的门槛。
+
+### 🚀 DeepSeek V4.1 主要新功能
+
+DeepSeek V4.1 的新功能可以从“模型能力”和“应用生态”两个层面来理解：
+
+#### 模型能力跃升
+V4.1-Flash 在核心性能上实现了“性能-费用帕累托改进”，即**性能更强、成本更低、速度更快**
+  [cite] https://api-docs.deepseek.com/zh-cn/news/news261017/
+。
+
+*   **基准测试全面增强**：在多项关键基准上显著超越前代。例如，考察综合能力的 **HLE** 分数从 36.8 提升至 **42.6**；评估编程能力的 **Terminal-Bench 4.0** 从 31.2 大幅跃升至 **42.3**；在 **DeepSWE**（77.0）、**Apex Bench**（72.1）等测试中也表现出色
+  [cite] https://api-docs.deepseek.com/zh-cn/news/news261017/
+。
+*   **“许愿式”编程**：通过基于自反馈的强化学习（RL）训练，模型能从零开始完成游戏开发、3D 建模等完整项目，实现了更强大的“许愿式”编程能力
+  [cite] https://api-docs.deepseek.com/zh-cn/news/news261017/
+。
+*   **原生多模态与超长上下文**：模型原生支持视觉理解，可在同一请求中处理图像和文本。同时，拥有高达 **1,048,576 token** 的上下文窗口，适合处理长文档和复杂的智能体任务。
+
+#### 应用生态开放：全家桶 API
+这是 V4.1 最具变革性的更新。DeepSeek 将此前仅用于自家 App 的各项交互能力，直接整合进了 API，**开启了“全家桶应用 API”**。开发者只需开启对应参数，服务端就会自动完成工具调用与上下文拼接，甚至可以 1:1 复刻完整的 DeepSeek App 体验
+  [cite] https://api-docs.deepseek.com/zh-cn/news/news261113/
+。
+
+### 📰 官方新闻重点总结（news261113）
+
+你提供的链接新闻发布于 **2026年11月14日**，重点正是宣布上述 **“全家桶应用 API”** 的全面开放。核心要点如下
+  [cite] https://api-docs.deepseek.com/zh-cn/news/news261113/
+：
+
+1.  **核心能力集成**：V4.1-Flash 模型（`deepseek-flash`）在 Messages、Responses 等接口下，直接支持了多项关键应用功能：
+    *   **联网搜索**：在非思考模式下，模型可自动发起网页或图片搜索并附引用作答。
+    *   **深度思考搜索**：在思考模式下，模型能在多步推理中自主联网搜索和阅读链接。
+    *   **文件输入**：支持上传 PDF、Office、图片等文件，自动解析后用于回答。
+    *   **阅读链接**：自动识别消息中的 URL，抓取网页内容并结合上下文回答。
+    *   **模型安全**：提供基础风控，审核输入输出，并在命中风险时返回拒答标识。
+
+2.  **底层能力独立调用**：除了集成功能，搜索、抓取（Fetch）、OCR、ASR（语音识别）、TTS（语音合成）等能力也作为**独立接口**开放，方便开发者灵活接入自有工作流。
+
+3.  **清晰的定价模式**：使用扩展能力时，除 Token 费用外，需支付工具调用费。例如，**文字/图片搜索**和**网页抓取**均为 **5元/千次**；**语音识别**为 **0.39元/小时**（限时5折）；**语音合成**为 **1.5元/万字符**（限时5折）。
+
+### 💎 总结
+
+DeepSeek V4.1 的更新是一次战略升级。它不仅在模型本身的跑分上继续保持竞争力，更重要的是通过**全家桶 API**，将搜索、文件处理、语音、安全等复杂能力“商品化”，极大地降低了开发者构建应用的门槛和集成成本。这标志着 DeepSeek 的竞争焦点，正从单一的模型性能，扩展到**以开发者体验和生态完整度为核心**的新维度
+  [cite] https://www.sohu.com/a/1101392359_260616?scm=10001.7746_13-119000.0.0-0-0-0-0.0&spm=smpc.channel_354.block3_32_P7Ovbu_1_fd.45.1794619037199tV5lgRF_7746
+。
+[end] status=completed title='DeepSeek V4.1新功能总结'
+usage: {"input_tokens": 18284, "input_tokens_details": {"cached_tokens": 7552}, "output_tokens": 1413, "output_tokens_details": {"reasoning_tokens": 248, "safety_tokens": 13}, "total_tokens": 19697, "server_tool_use": {"tool_search": 4, "tool_fetch": 1, "tool_image_search": 0}}
+
+
+==== 汇总 ====
+工具调用 item: 5 ['deep_search', 'deep_search', 'deep_search', 'deep_search', 'deep_search']
+回答字符数: 1582
+
+多轮：把上一轮的 output item 原样放回 input，保留 kind 与 signature。

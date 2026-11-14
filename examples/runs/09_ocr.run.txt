@@ -1,0 +1,15 @@
+[ocr] id=ocr-c2d02764-90dc-4fdb-8c63-60a6baee7ca7 page_count=1 usage={
+  "input_tokens": 324,
+  "output_tokens": 226,
+  "total_tokens": 550
+}
+
+--- page 0 ---
+<｜ref｜>title<｜/ref｜><｜box｜>[[41,92,842,145]]<｜/box｜> DeepSeek 工具 API 定价 
+<｜ref｜>table<｜/ref｜><｜box｜>[[41,216,999,874]]<｜/box｜> <table><tr><td>项目</td><td>价格</td></tr><tr><td>文字 / 图片搜索</td><td>5 元 / 千次</td></tr><tr><td>网页抓取</td><td>5 元 / 千次</td></tr><tr><td>文字识别</td><td>1.5 元 / 千页</td></tr><tr><td>语音识别</td><td>0.39 元 / 小时</td></tr><tr><td>语音合成</td><td>1.5 元 / 万字符</td></tr></table>
+<｜ref｜>text<｜/ref｜
+
+写入 /Users/jimmy/Github/Neo/DeepseekBot/docs/deepseek-app-api-tutorial/demos/ocr.md
+
+坐标解读：<|box|>[[x1,y1,x2,y2]]<|/box|>，原点左上角，归一化到 0-1000；
+         实际像素 x = x * 页面宽度 / 1000，可用于自己裁图。

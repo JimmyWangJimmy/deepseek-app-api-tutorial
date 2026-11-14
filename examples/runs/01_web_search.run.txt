@@ -1,0 +1,86 @@
+[start] usage={"input_tokens": 20, "cache_creation_input_tokens": 0, "cache_read_input_tokens": 0, "output_tokens": 0, "service_tier": "standard"}
+
+[tool] deepseek_web_search kind=search input={"action": "search", "queries": ["\"DeepSeek V4.1\" 是什么时候发布的", "\"DeepSeek V4.1\" 有哪些新能力"]}
+  · [DeepSeek] DeepSeek | 深度求索
+    https://www.deepseek.com/news/
+  · [DeepSeek] DeepSeek V4.1 Flash 新版本：许愿式编程一键成真 | DeepSeek API Docs
+    https://api-docs.deepseek.com/zh-cn/news/news261017/
+  · [DeepSeek] 
+    https://api-docs.deepseek.com/zh-cn/news/news260910.md
+  · [DeepSeek] DeepSeek-V4.1-Flash-1017: Wish-Driven Programming Made Real | DeepSeek API Docs
+    https://api-docs.deepseek.com/news/news261017/
+  · [智源社区] 刚刚，DeepSeek双王炸！许愿式编程暴击GPT-6 Astra - 刚刚，DeepSeek双王炸
+    https://hub.baai.ac.cn/view/58788#1
+  · [DeepSeek] Change Log | DeepSeek API Docs - Search / Fetch API is now available, powered by our in-house search engine and supporting web search and fetch
+    https://api-docs.deepseek.com/updates/#1
+  · [DeepSeek] 
+    https://api-docs.deepseek.com/news/news261017.md
+  · [DescribeAllowListDetail--表格数据库 HBase 版-火山引擎] DeepSeek-V4.1-Flash （升级 1017） - 火山方舟
+    https://docs.volcengine.com/docs/ark/deepseek-v4-1-flash?lang=zh
+  · [华为云社区] DeepSeek 十月双发：V4.1-Flash-1017 上线，推理框架 DeepInfer 全面开源 - 云宝助手
+    https://bbs.huaweicloud.com/blogs/501894#1
+  · [tencent.cn] DeepSeek V4.1 Flash 1017 上线，腾讯云 ADP 已第一时间接入
+    https://cloud.tencent.cn/developer/article/2768978
+  · [钛媒体网] DeepSeek新模型升级，梁文锋正在为具身智能铺路？-钛媒体官方网站
+    https://m.tmtpost.com/8173675.html
+  · [Tencent] DeepSeek-V4.1-Flash-1017更新把搜索引擎塞进了 API：你的 RAG 还剩几层？ - V4.1-Flash-1017：涨分表、口径脚注与"变短变快"的成本账
+    https://cloud.tencent.com.cn/developer/article/2764487?policyId=20240000&traceId=&frompage=homepage#2
+
+[answer] DeepSeek V4.1 系列有两个关键时间点：**V4.1 Flash 首次发布于 2026 年 9 月 10 日**，而后续的小版本升级 **V4.1-Flash-1017 于 2026 年 10 月 16 日至 17 日上线**。你问的“V4.1”通常指首发版本，但 10 月的升级版带来了更显著的能力变化。
+
+### 🚀 首次发布：DeepSeek V4.1 Flash（2026 年 9 月 10 日）
+这一版是全新模型结构系列中最小尺寸的模型，核心突破在于原生多模态能力与架构创新
+  [cite]  https://api-docs.deepseek.com/zh-cn/news/news260910.md
+
+[answer] 。
+*   **原生多模态**：具备原生的视觉理解能力。
+*   **全新架构**：采用 Causal-Encoder-Decoder 结构的 552B 参数 MoE 模型，输入输出不对称，成本显著低于同尺寸模型。
+*   **全面替代**：性能、费用、速度全面超越 V4 Pro，官方随即计划有序下线 V4 Pro。
+
+### ✨ 重大升级：V4.1-Flash-1017（2026 年 10 月）
+这一版本主打“许愿式编程”，重点强化了从零构建完整项目的能力
+  [cite] DeepSeek V4.1 Flash 新版本：许愿式编程一键成真 | DeepSeek API Docs https://api-docs.deepseek.com/zh-cn/news/news261017/
+
+  [cite] 刚刚，DeepSeek双王炸！许愿式编程暴击GPT-6 Astra - 刚刚，DeepSeek双王炸 https://hub.baai.ac.cn/view/58788#1
+
+[answer] 。
+*   **许愿式编程**：通过自反馈强化学习，极大提升了在极少提示下直接开发完整项目的能力，例如故宫 3D 建模、网页赛车游戏、复刻《传送门 2》等
+  [cite] DeepSeek V4.1 Flash 新版本：许愿式编程一键成真 | DeepSeek API Docs https://api-docs.deepseek.com/zh-cn/news/news261017/
+
+  [cite] 刚刚，DeepSeek双王炸！许愿式编程暴击GPT-6 Astra - 刚刚，DeepSeek双王炸 https://hub.baai.ac.cn/view/58788#1
+
+[answer] 。
+*   **性能与成本优化**：在 Terminal-Bench 4.0、ProgramBench 等多项基准测试中大幅提升，同时缩短了任务运行时间与输出长度，实现了“性能-费用帕累托改进”
+  [cite] DeepSeek V4.1 Flash 新版本：许愿式编程一键成真 | DeepSeek API Docs https://api-docs.deepseek.com/zh-cn/news/news261017/
+
+  [cite] DeepSeek-V4.1-Flash-1017更新把搜索引擎塞进了 API：你的 RAG 还剩几层？ - V4.1-Flash-1017：涨分表、口径脚注与"变短变快"的成本账 https://cloud.tencent.com.cn/developer/article/2764487?policyId=20240000&traceId=&frompage=homepage#2
+
+[answer] 。
+*   **配套更新**：同步开放了自研的 Search 与 Fetch API，并开源了模型权重（MIT 协议）
+  [cite] 刚刚，DeepSeek双王炸！许愿式编程暴击GPT-6 Astra - 刚刚，DeepSeek双王炸 https://hub.baai.ac.cn/view/58788#1
+
+  [cite]  https://api-docs.deepseek.com/news/news261017.md
+
+  [cite] DeepSeek V4.1 Flash 1017 上线，腾讯云 ADP 已第一时间接入 https://cloud.tencent.cn/developer/article/2768978
+
+[answer] 。
+
+如果你关注的是最新的编程与项目构建能力，10 月的 1017 版本是更值得关注的节点。
+[end] stop_reason=end_turn title=None
+usage: {"input_tokens": 8101, "cache_creation_input_tokens": 0, "cache_read_input_tokens": 0, "output_tokens": 476, "service_tier": "standard", "server_tool_use": {"web_search_requests": 1, "web_fetch_requests": 0, "tool_search": 2, "tool_fetch": 0, "tool_image_search": 0}}
+
+
+==== 汇总 ====
+工具调用块: 1 → ['search']
+引用条数: 10
+ - https://api-docs.deepseek.com/zh-cn/news/news260910.md
+ - https://api-docs.deepseek.com/zh-cn/news/news261017/
+ - https://hub.baai.ac.cn/view/58788#1
+ - https://api-docs.deepseek.com/zh-cn/news/news261017/
+ - https://hub.baai.ac.cn/view/58788#1
+ - https://api-docs.deepseek.com/zh-cn/news/news261017/
+ - https://cloud.tencent.com.cn/developer/article/2764487?policyId=20240000&traceId=&frompage=homepage#2
+ - https://hub.baai.ac.cn/view/58788#1
+ - https://api-docs.deepseek.com/news/news261017.md
+ - https://cloud.tencent.cn/developer/article/2768978
+回答: DeepSeek V4.1 系列有两个关键时间点：**V4.1 Flash 首次发布于 2026 年 9 月 10 日**，而后续的小版本升级 **V4.1-Flash-1017 于 2026 年 10 月 16 日至 17 日上线**。你问的“V4.1”通常指首发版本，但 10 月的升级版带来了更显著的能力变化。  ### 🚀 首次发布：DeepSeek V4.1 Flash（2026 年 9  ...

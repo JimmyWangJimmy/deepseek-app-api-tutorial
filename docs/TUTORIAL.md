@@ -86,8 +86,10 @@ python3 01_web_search.py --dry-run
 
 ## 2. 联网搜索（关闭思考）
 
-**开关**：只声明 `deepseek_web_search`，不开启思考。
+**开关**：只声明 `deepseek_web_search`，并**显式关闭思考**。
 **行为**：模型自己判断要不要搜、搜什么，一次调用可含多个查询词，回答带引用。
+
+> ⚠️ 实测坑：`deepseek-flash` **默认开启思考**——不传 `thinking` 时服务端按 `enabled` 处理，`kind` 全是 `deep_search`，也就是说你拿到的是深度思考搜索而不是标准联网搜索。要 `kind=search`，必须写 `"thinking": {"type": "disabled"}`。
 
 ```python
 payload = {
@@ -659,7 +661,7 @@ Chat Completions 的 assistant 结构长这样（协议间字段名不同，语�
 
 ```
 demos/
-    ├── common.py                  # 三协议封装 + SSE 解析 + 流式打印
+    ├── common.py                  # 三协议封装 + SSE 解析（强制 UTF-8）+ 流式打印
     ├── requirements.txt
     ├── 01_web_search.py           # 联网搜索（关思考）
     ├── 02_deep_thinking_search.py # 深度思考搜索（开思考）
@@ -678,3 +680,12 @@ demos/
 ```
 
 全部脚本 `--dry-run` 无 key 可跑，验证请求体；真调用需要 `DEEPSEEK_API_KEY`，按次计费，注意成本。
+
+运行样例：
+
+```
+examples/
+├── runs/       # 2026-11-14 真实调用日志（14 个 demo，全部跑通）
+├── dryrun/     # --dry-run 输出
+└── audio/      # TTS 真实产物 speech.wav
+```

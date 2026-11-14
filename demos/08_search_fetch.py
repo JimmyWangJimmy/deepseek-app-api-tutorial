@@ -12,27 +12,35 @@ import pathlib
 from common import dumps, post_json
 
 # --- Search：支持 site: / -site: / "短语" / -词 / lang: / after: / before: 等语法
-query = 'DeepSeek 全家桶 API site:api-docs.deepseek.com OR site:github.com lang:zh after:2026'
+# 注意：语法叠加过多会把结果筛空（下面第二个查询就是反例），生产环境建议先跑朴素查询再逐步加条件
+QUERIES = [
+    "DeepSeek 全家桶应用 API 发布",                                  # 朴素查询
+    "DeepSeek 模型 site:github.com OR site:huggingface.co lang:zh",   # 带语法
+]
 
-search = post_json(
-    "/v1/tools/search",
-    {
-        "query": query,
-        "count": 5,
-        "ori_question": "DeepSeek 最近开放了哪些应用能力？",  # 帮搜索引擎理解意图
-        "need_content": False,                                  # True 才返回正文，更贵更慢
-    },
-)
-
-print(f"[search] query={query!r} 结果 {len(search.get('results', []))} 条")
-for r in search.get("results", []):
-    print(f"- rerank={r.get('rerank_score')} authority={r.get('authority')} "
-          f"{r.get('title')}  ({r.get('site_name')})")
-    print(f"  {r.get('url')}")
-    print(f"  summary: {(r.get('summary') or '')[:120]}...")
-
-best = [r for r in search.get("results", []) if (r.get("rerank_score") or 0) >= 1.5]
-print(f"\n筛选：rerank_score >= 1.5 的优质结果 {len(best)} 条（>=3 分的 authority 表示极权威）")
+best = []
+for query in QUERIES:
+    search = post_json(
+        "/v1/tools/search",
+        {
+            "query": query,
+            "count": 5,
+            "ori_question": "DeepSeek 最近开放了哪些应用能力？",  # 帮搜索引擎理解意图
+            "need_content": False,                                  # True 才返回正文，更贵更慢
+        },
+    )
+    results = search.get("results", [])
+    print(f"[search] {query!r} → {len(results)} 条")
+    for r in results:
+        print(f"- rerank={r.get('rerank_score')} authority={r.get('authority')} "
+              f"{r.get('title')}  ({r.get('site_name')})")
+        print(f"  {r.get('url')}")
+        print(f"  summary: {(r.get('summary') or '')[:110]}...")
+    best = [r for r in results if (r.get("rerank_score") or 0) >= 1.5]
+    if best:
+        print(f"  → rerank_score >= 1.5 的优质结果 {len(best)} 条（authority >= 3 为极权威）")
+        break
+    print("  → 没有优质结果，换一个查询再试\n")
 
 # --- Fetch：抓一页，落成 Markdown
 if best:

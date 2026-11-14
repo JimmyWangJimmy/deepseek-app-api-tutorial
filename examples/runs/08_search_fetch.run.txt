@@ -1,0 +1,53 @@
+[search] 'DeepSeek 全家桶应用 API 发布' → 5 条
+- rerank=2.999756155531209 authority=3 DeepSeek 发布全家桶应用 API | DeepSeek API Docs  (DeepSeek)
+  https://api-docs.deepseek.com/zh-cn/news/news261113/
+  summary: DeepSeek 全家桶应用 API 已发布：联网搜索、文件输入、阅读链接、模型安全、ASR、TTS 等，点此查看使用指南
+
+# DeepSeek 发布全家桶应用 API
+
+在 DeepSeek App（含网页端）的对话...
+- rerank=2.6754634234217285 authority=4 DeepSeek宣布开放全家桶应用API：开发者可1:1复刻出完整的DeepSeek App  (Sohu)
+  https://www.sohu.com/a/1101392359_260616?scm=10001.7746_13-119000.0.0-0-0-0-0.0&spm=smpc.channel_354.block3_32_P7Ovbu_1_fd.45.1794619037199tV5lgRF_7746
+  summary: # DeepSeek宣布开放全家桶应用API：开发者可1:1复刻出完整的DeepSeek App
+...
+2026-11-14 09:10
+...
+澎湃新闻记者 范佳来
+
+DeepSeek宣布开放全家桶应用API。
+
+在...
+- rerank=2.567365846051902 authority=4 DeepSeek发布全家桶应用API  (Sohu)
+  https://www.sohu.com/a/1101254724_115362?scm=10001.7746_13-119000.0.0-0-0-0-0.0&spm=smpc.channel_354.block3_32_P7Ovbu_1_fd.37.17945803153725fJgfq4_7746
+  summary: # DeepSeek发布全家桶应用API
+...
+2026-11-13 22:30
+...
+每经AI快讯，11月13日，DeepSeek公告，正式开放这套全家桶应用API：在原有API中开启对应参数，即可获得深度思考搜索...
+- rerank=2.459268268682075 authority=3 DeepSeek发布全家桶应用API  (Jiemian.com)
+  https://www.jiemian.com/article/15332487.html
+  summary: # DeepSeek发布全家桶应用API
+
+原创新闻界面快报 · 12分钟前来源：界面新闻
+...
+11月13日，DeepSeek正式开放全家桶应用API。在原有API中开启对应参数，即可获得深度思考搜索、文件输入等对话...
+- rerank=2.459268268682075 authority=3 DeepSeek 发布全家桶应用 API  (Sohu)
+  https://www.sohu.com/a/1101274628_100106801?scm=10001.7746_13-119000.0.0-0-0-0-0.0&spm=smpc.channel_354.block3_32_P7Ovbu_1_fd.2.1794588145124aI4GUIZ_7746
+  summary: # DeepSeek 发布全家桶应用 API
+
+2026-11-14 00:26 来源: DoNews
+...
+11月14日消息，13 日晚间，DeepSeek 宣布正式开放全家桶应用 API：在原有 API 中开启对应...
+  → rerank_score >= 1.5 的优质结果 5 条（authority >= 3 为极权威）
+
+[fetch] https://api-docs.deepseek.com/zh-cn/news/news261113/
+  title='DeepSeek 发布全家桶应用 API | DeepSeek API Docs'  markdown 1613 字符 → /Users/jimmy/Github/Neo/DeepseekBot/docs/deepseek-app-api-tutorial/demos/fetched.md
+
+错误处理：408/429/5xx 可重试；400/401/403/404 不重试；402 先充值。
+计费：只有 HTTP 200 且有结果才算一次；count 不影响单价。
+
+响应字段速查： {
+  "rerank_score": "0~3，>=1.5 优质",
+  "authority": "0~4，>=3 极权威",
+  "date": "UTC RFC3339 或 null"
+}

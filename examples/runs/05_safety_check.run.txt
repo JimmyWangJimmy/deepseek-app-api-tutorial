@@ -1,0 +1,16 @@
+  "input_tokens": 37,
+  "cache_creation_input_tokens": 0,
+  "cache_read_input_tokens": 0,
+  "output_tokens": 150,
+  "service_tier": "standard",
+  "output_tokens_details": {
+    "thinking_tokens": 100,
+    "safety_tokens": 7
+  }
+}
+
+要点：
+- 审核 Token 按输出 Token 计费，单独列在 usage.output_tokens_details.safety_tokens
+- 输入命中审核时直接 HTTP 400 Content Exists Risk，输入 Token 仍按缓存命中价计费
+- level 只能是 low / high；low 等于不传（API 默认检查）
+- 对外提供服务必须开 high，并自行完成内容审核、大模型登记、AI 标识
